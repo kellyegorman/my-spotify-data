@@ -3,12 +3,12 @@ from tkinter import Text
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
-# Spotify API credentials
+#api
 SPOTIFY_CLIENT_ID = "your_client_id"
 SPOTIFY_CLIENT_SECRET = "your_client_secret"
 SPOTIFY_REDIRECT_URI = "http://localhost:8888/callback"
 
-# Function to fetch the user's top song and display it in the text box
+# get top song
 def fetch_top_song():
     try:
         sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
@@ -36,6 +36,7 @@ def fetch_top_song():
         text_box.delete(1.0, tk.END)
         text_box.insert(tk.END, f"An error occurred: {e}")
 
+# get top artist
 def fetch_top_artist():
     try:
         sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
@@ -62,46 +63,42 @@ def fetch_top_artist():
         text_box_2.insert(tk.END, f"An error occurred: {e}")
 
 
-# Create the main application window
+# main window
 root = tk.Tk()
 
-# Set the window title and size
+# title
 root.title("My Spotify API Question")
 window_width, window_height = 600, 400
 root.geometry(f"{window_width}x{window_height}")
 
-# Set the background color of the main window to light green
-root.configure(bg="#90EE90")  # Light green hex color
+# background
+root.configure(bg="#62d089") 
 
-# Calculate the position to center the window on the screen
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 position_x = (screen_width // 2) - (window_width // 2)
 position_y = (screen_height // 2) - (window_height // 2)
 root.geometry(f"{window_width}x{window_height}+{position_x}+{position_y}")
 
-# Make sure the window is always on top
 root.attributes("-topmost", True)
 
-# Common font for both text boxes
+# text boxes font
 font_style = ("Arial", 10)
 
-# Create a frame to hold the textboxes side by side
-frame = tk.Frame(root, bg="lightgreen")  # Corrected color
-frame.configure(bg="lightgreen")  # Corrected color
+frame = tk.Frame(root, bg="lightgreen") 
+frame.configure(bg="lightgreen") 
 frame.pack(pady=20)
 
-# Create the first Text widget (for the top song), smaller size
+# text box 1
 text_box = Text(frame, wrap=tk.WORD, height=6, width=25, font=font_style, bd=2, relief="solid")
 text_box.pack(side=tk.LEFT, padx=10)
 
-# Create the second Text widget (for the top artist), smaller size
+# text box 2
 text_box_2 = Text(frame, wrap=tk.WORD, height=6, width=25, font=font_style, bd=2, relief="solid")
 text_box_2.pack(side=tk.LEFT, padx=10)
 
-# Automatically fetch and display the user's top song and top artist when the window opens
-root.after(100, fetch_top_song)  # Schedule the function to run after 100ms
-root.after(1000, fetch_top_artist)  # Schedule the function to run after 1000ms
+root.after(100, fetch_top_song)  
+root.after(1000, fetch_top_artist) 
 
 
 # Run the application
