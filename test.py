@@ -6,10 +6,6 @@ from PIL import Image, ImageTk
 import requests
 from io import BytesIO
 
-SPOTIFY_CLIENT_ID = "9ffe31e415c04575acc9a54a4b034f5c"
-SPOTIFY_CLIENT_SECRET = "4f00e5d355db450f8a945da14d8ae36c"
-SPOTIFY_REDIRECT_URI = "http://localhost:8888/callback"
-
 # song
 def fetch_top_song():
     try:
